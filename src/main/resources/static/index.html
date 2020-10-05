@@ -1,17 +1,55 @@
 <html>
-    <head>
-        <title>kei</title>
-        <style>
-            .centered {
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                font-family: "Montserrat",Arial,Tahoma,sans-serif;
-            }
-        </style>
-    </head>
-    <body>
-        <p class="centered">D R I F T B O T T L E</p>
-    </body>
+<head>
+    <title>driftbottle</title>
+    <style>
+        .centered {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: "Montserrat", Arial, Tahoma, sans-serif;
+            font-size: 24px;
+            transition: 1s;
+            opacity: 1;
+        }
+
+        #initialTitle {
+            opacity: 1;
+        }
+
+        #mainList {
+            display: none;
+        }
+    </style>
+</head>
+<body onclick="start()">
+<p class="centered" id="initialTitle">D R I F T B O T T L E</p>
+<ul class="centered" id="mainList"></ul>
+
+<script>
+    const mainList = document.getElementById('mainList')
+
+    let loadData = async () => {
+        const response = await fetch('http://localhost:5000/messages')
+        const messages = await response.json()
+
+        messages.forEach(message => {
+            const li = document.createElement("li");
+            li.appendChild(document.createTextNode(message.message));
+            mainList.appendChild(li);
+        })
+    }
+
+    loadData()
+
+    setTimeout(() => {
+        const titleElement = document.getElementById('initialTitle')
+        titleElement.style.transition = "opacity 1000ms"
+        titleElement.style.opacity = "0"
+        setTimeout(() => {
+            document.getElementById('mainList').style.display = 'block'
+        }, 1000)
+    }, 10)
+</script>
+</body>
 </html>
