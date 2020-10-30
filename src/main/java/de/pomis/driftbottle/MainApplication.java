@@ -36,7 +36,7 @@ public class MainApplication implements CommandLineRunner {
 
 		messageRepository.save(new MessageEntity(1l, 2l, "Guten Morgen"));
 		messageRepository.save(new MessageEntity(1l, 3l, "Good morning"));
-		messageRepository.save(new MessageEntity(3l, 2l,"Bonjour"));
+		messageRepository.save(new MessageEntity(3l, 2l, "Bonjour"));
 
 		System.out.println("\nMessageEntity :: findAll()");
 		messageRepository.findAll().forEach(System.out::println);
